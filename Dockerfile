@@ -30,6 +30,6 @@ COPY --from=jlink-package /opt/jdk-11-mini-runtime /opt/jdk-11-mini-runtime
 
 COPY --from=maven ./target/Payment.jar ./
 
-EXPOSE 8111
+EXPOSE 8087
 
 ENTRYPOINT ["java"]
