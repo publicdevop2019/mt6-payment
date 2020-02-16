@@ -1,4 +1,4 @@
-package hw.shared;
+package com.hw.shared;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

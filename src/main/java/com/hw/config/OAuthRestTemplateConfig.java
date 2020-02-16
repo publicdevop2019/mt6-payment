@@ -1,4 +1,4 @@
-package hw.config;
+package com.hw.config;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;

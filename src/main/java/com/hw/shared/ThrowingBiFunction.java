@@ -1,4 +1,4 @@
-package hw.shared;
+package com.hw.shared;
 
 import java.util.function.BiFunction;
 

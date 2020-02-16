@@ -1,4 +1,4 @@
-package hw.shared;
+package com.hw.shared;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;

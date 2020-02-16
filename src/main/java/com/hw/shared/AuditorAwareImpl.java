@@ -1,4 +1,4 @@
-package hw.shared;
+package com.hw.shared;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.web.context.request.RequestContextHolder;

@@ -1,4 +1,4 @@
-package hw.shared;
+package com.hw.shared;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,7 @@ public class Swagger2Config {
                 .contact(new Contact("Haolin Wei", "www.tbd.com", "haolinwei2015@gmail.com"))
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-                .version("1.0.0")
+                .version("0.0.0a")
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package hw.shared;
+package com.hw.shared;
 
 @FunctionalInterface
 public interface ThrowingBiConsumer<T, U, E extends Exception> {

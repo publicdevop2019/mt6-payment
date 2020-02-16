@@ -1,8 +1,8 @@
-package hw.controller;
+package com.hw.controller;
 
-import hw.clazz.PaymentStatus;
-import hw.entity.Payment;
-import hw.repo.PaymentRepo;
+import com.hw.clazz.PaymentStatus;
+import com.hw.entity.Payment;
+import com.hw.repo.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
