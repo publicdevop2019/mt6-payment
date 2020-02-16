@@ -1,6 +1,7 @@
 package hw.entity;
 
 import hw.clazz.PaymentStatus;
+import hw.shared.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;

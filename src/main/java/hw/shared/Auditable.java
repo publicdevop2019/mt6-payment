@@ -1,4 +1,4 @@
-package hw.entity;
+package hw.shared;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
