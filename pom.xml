@@ -15,9 +15,6 @@
         <relativePath>./shared/parent-pom.xml</relativePath>
     </parent>
 
-    <dependencies>
-    </dependencies>
-
     <build>
         <finalName>Payment</finalName>
     </build>
