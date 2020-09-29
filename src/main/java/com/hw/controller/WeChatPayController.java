@@ -1,7 +1,7 @@
 package com.hw.controller;
 
 import com.hw.clazz.PaymentStatus;
-import com.hw.entity.Payment;
+import com.hw.entity.BizPayment;
 import com.hw.repo.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.hw.shared.AppConstant.HTTP_HEADER_CHANGE_ID;
+
 @RestController
 @RequestMapping(produces = "application/json")
 public class WeChatPayController {
@@ -22,9 +24,11 @@ public class WeChatPayController {
 
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    AppPaymentLinkApplicationService appPaymentLinkApplicationService;
 
     @PostMapping("paymentLink")
-    public ResponseEntity<?> getWeChatPaymentLink(@RequestHeader("authorization") String authorization, @RequestBody Map<String, String> body) {
+    public ResponseEntity<?> createWeChatPaymentLink(@RequestHeader("authorization") String authorization, @RequestBody Map<String, String> body, @RequestHeader(HTTP_HEADER_CHANGE_ID) String changeId) {
         String orderId = body.get("orderId");
         String randomStr = UUID.randomUUID().toString().replace("-", "");
         HashMap<String, String> stringStringHashMap = new HashMap<>();
@@ -34,33 +38,22 @@ public class WeChatPayController {
         /**
          * @todo remove after real integration
          */
-        afterQRScanCallback("dummyOpenId", orderId);
+        afterQRScanCallback("dummyOpenId", orderId,changeId);
         return ResponseEntity.ok(stringStringHashMap);
     }
 
     @PostMapping("afterQRScanCallback")
-    public ResponseEntity<?> afterQRScanCallback(@RequestParam("openid") String openId, @RequestParam("productid") String productId) {
-
-        Payment payment = new Payment();
-        payment.setOrderId(productId);
-        payment.setUserId(openId);
-        payment.setStatus(PaymentStatus.unpaid);
-
-
-        String prepayId = callWeChatPaymentAPI();
-
-        payment.setPrepayId(prepayId);
-
-        paymentRepo.save(payment);
-
-        notifyWeChatToStartUserPay(prepayId);
-
+    public ResponseEntity<?> afterQRScanCallback(@RequestParam("openid") String openId, @RequestParam("productid") String productId, @RequestHeader(HTTP_HEADER_CHANGE_ID) String changeId) {
+        AppCreatePaymentLinkCommand appCreatePaymentLinkCommand = new AppCreatePaymentLinkCommand();
+        appCreatePaymentLinkCommand.setOrderId(productId);
+        appCreatePaymentLinkCommand.setUserId(openId);
+        appPaymentLinkApplicationService.create(appCreatePaymentLinkCommand,changeId);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("paySuccessCallback")
     public ResponseEntity<?> paySuccessCallback(@RequestParam("productid") String productId) {
-        Optional<Payment> paymentByOrderId = paymentRepo.getPaymentByOrderId(productId);
+        Optional<BizPayment> paymentByOrderId = paymentRepo.getPaymentByOrderId(productId);
         if (paymentByOrderId.isEmpty())
             return ResponseEntity.badRequest().build();
         paymentByOrderId.get().setStatus(PaymentStatus.paid);
@@ -69,7 +62,7 @@ public class WeChatPayController {
 
     @GetMapping("paymentStatus/{orderId}")
     public ResponseEntity<?> checkPaymentStatus(@PathVariable("orderId") String orderId) {
-        Optional<Payment> paymentByOrderId = paymentRepo.getPaymentByOrderId(orderId);
+        Optional<BizPayment> paymentByOrderId = paymentRepo.getPaymentByOrderId(orderId);
         if (paymentByOrderId.isEmpty())
             return ResponseEntity.badRequest().build();
         Map<String, Boolean> msg = new HashMap<>();
@@ -90,12 +83,8 @@ public class WeChatPayController {
         return ResponseEntity.ok().build();
     }
 
-    private String callWeChatPaymentAPI() {
-        return UUID.randomUUID().toString().replace("-", "");
-    }
 
-    private void notifyWeChatToStartUserPay(String prepayId) {
-    }
+
 
     private Boolean checkWeChatPaymentStatus(String prepayId) {
         return Boolean.TRUE;
