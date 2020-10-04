@@ -1,6 +1,6 @@
 package com.hw.controller;
 
-import com.hw.clazz.PaymentStatus;
+import com.hw.config.PaymentStatus;
 import com.hw.entity.BizPayment;
 import com.hw.repo.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;

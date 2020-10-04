@@ -1,6 +1,6 @@
 package com.hw.entity;
 
-import com.hw.clazz.PaymentStatus;
+import com.hw.config.PaymentStatus;
 import com.hw.controller.AppCreatePaymentLinkCommand;
 import com.hw.shared.Auditable;
 import com.hw.shared.rest.IdBasedEntity;

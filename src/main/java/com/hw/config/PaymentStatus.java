@@ -1,4 +1,4 @@
-package com.hw.clazz;
+package com.hw.config;
 
 public enum PaymentStatus {
     unpaid,

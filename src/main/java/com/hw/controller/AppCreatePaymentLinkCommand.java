@@ -1,6 +1,5 @@
 package com.hw.controller;
 
-import com.hw.clazz.PaymentStatus;
 import lombok.Data;
 
 @Data

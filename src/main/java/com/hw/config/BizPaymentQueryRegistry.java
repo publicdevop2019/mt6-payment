@@ -1,4 +1,4 @@
-package com.hw.clazz;
+package com.hw.config;
 
 import com.hw.entity.BizPayment;
 import com.hw.shared.sql.RestfulQueryRegistry;

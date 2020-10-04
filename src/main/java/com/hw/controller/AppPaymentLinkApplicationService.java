@@ -1,7 +1,7 @@
 package com.hw.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hw.clazz.BizPaymentQueryRegistry;
+import com.hw.config.BizPaymentQueryRegistry;
 import com.hw.entity.BizPayment;
 import com.hw.repo.PaymentRepo;
 import com.hw.shared.IdGenerator;
