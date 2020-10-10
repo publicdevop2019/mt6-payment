@@ -13,13 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Payment")
 @Data
 @NoArgsConstructor
-public class BizPayment extends Auditable implements IdBasedEntity {
+public class BizPayment extends Auditable implements IdBasedEntity , Serializable {
+    private static final long serialVersionUID = 1;
     @Id
     Long id;
 
