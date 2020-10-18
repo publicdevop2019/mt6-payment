@@ -8,8 +8,8 @@ import javax.annotation.PostConstruct;
 @Component
 public class BizPaymentQueryRegistry extends RestfulQueryRegistry<BizPayment> {
     @Override
-    @PostConstruct
-    protected void configQueryBuilder() {
-
+    public Class<BizPayment> getEntityClass() {
+        return BizPayment.class;
     }
+
 }
