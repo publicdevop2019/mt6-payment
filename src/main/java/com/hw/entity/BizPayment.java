@@ -3,14 +3,13 @@ package com.hw.entity;
 import com.hw.config.PaymentStatus;
 import com.hw.controller.AppCreatePaymentLinkCommand;
 import com.hw.shared.Auditable;
-import com.hw.shared.rest.IdBasedEntity;
+import com.hw.shared.rest.Aggregate;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -20,7 +19,7 @@ import java.util.UUID;
 @Table(name = "Payment")
 @Data
 @NoArgsConstructor
-public class BizPayment extends Auditable implements IdBasedEntity , Serializable {
+public class BizPayment extends Auditable implements Aggregate, Serializable {
     private static final long serialVersionUID = 1;
     @Id
     Long id;
@@ -34,7 +33,9 @@ public class BizPayment extends Auditable implements IdBasedEntity , Serializabl
     @NotEmpty
     @Column(nullable = false)
     private String orderId;
-
+    @Version
+    @Setter(AccessLevel.NONE)
+    private Integer version;
     /**
      * @note from wechat
      */
