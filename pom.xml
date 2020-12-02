@@ -7,7 +7,6 @@
     <version>0.0.0a</version>
     <packaging>jar</packaging>
 
-    <name>Payment</name>
     <parent>
         <groupId>com.hw</groupId>
         <artifactId>config-center</artifactId>
@@ -18,5 +17,4 @@
     <build>
         <finalName>Payment</finalName>
     </build>
-
 </project>
